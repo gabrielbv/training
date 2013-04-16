@@ -4,11 +4,11 @@ import sys
 
 PROJECT_ROOT = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('gabrielbv', 'gdianu@zehnergroup.com'),
 )
 
 MANAGERS = ADMINS
@@ -27,7 +27,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["33.33.33.80"]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -150,6 +150,29 @@ INSTALLED_APPS = (
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'filters': {
+#         'require_debug_false': {
+#             '()': 'django.utils.log.RequireDebugFalse'
+#         }
+#     },
+#     'handlers': {
+#         'mail_admins': {
+#             'level': 'ERROR',
+#             'filters': ['require_debug_false'],
+#             'class': 'django.utils.log.AdminEmailHandler'
+#         }
+#     },
+#     'loggers': {
+#         'django.request': {
+#             'handlers': ['mail_admins'],
+#             'level': 'ERROR',
+#             'propagate': True,
+#         },
+#     }
+# }
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -158,12 +181,23 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
+    'formatters': {
+        'verbose': {
+            'format': '[%(asctime)s: %(levelname)s/%(processName)s/%(process)s] %(name)s - %(message)s \t\t\t in %(funcName)s@%(pathname)s:%(lineno)d'
+        },
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console': {
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter': 'verbose',
+            'stream': 'ext://sys.stderr'
+        },
     },
     'loggers': {
         'django.request': {
@@ -171,5 +205,14 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'django': {
+            'propagate': True,
+            'level':'WARNING',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+        'propagate': True,
     }
 }
