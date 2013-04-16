@@ -11,9 +11,7 @@ urlpatterns = patterns('',
     url(r'^polls/', include('polls.urls', namespace="polls")),
     url(r'^admin/', include(admin.site.urls)),
 
-    #handler500 = 'mysite.views.my_custom_error_view'
-    
-    #handler404 = 'mysite.views.my_custom_404_view'
+
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
