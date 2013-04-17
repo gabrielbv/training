@@ -4,7 +4,7 @@ import sys
 
 PROJECT_ROOT = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
